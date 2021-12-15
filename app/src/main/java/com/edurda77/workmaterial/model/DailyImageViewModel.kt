@@ -1,9 +1,16 @@
 package com.edurda77.workmaterial.model
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Bundle
+import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.edurda77.workmaterial.BuildConfig
+import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,6 +66,17 @@ class DailyImageViewModel (
             liveDataForViewToObserve.value = DailyImage.Error(Throwable("Unidentified error"))
         } else {
             liveDataForViewToObserve.value = DailyImage.Error(Throwable(message))
+        }
+    }
+    fun searchWiki(wikiTextView: TextView, inputLayout: TextInputLayout,
+                           context: Context, savedInstanceState: Bundle?) {
+        inputLayout.setEndIconOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val url = "https://ru.wikipedia.org/wiki/${wikiTextView.text}"
+            val uri = Uri.parse(url)
+            intent.data = uri
+            startActivity(context, intent,savedInstanceState)
+
         }
     }
 }
