@@ -6,11 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImage
 import com.edurda77.workmaterial.model.DailyImageViewModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class BasicFragment : Fragment() {
 
@@ -18,8 +24,11 @@ class BasicFragment : Fragment() {
     private val viewModel by viewModels<DailyImageViewModel>()
 
     private lateinit var dailyImageView: ImageView
+    private lateinit var progressbar: ProgressBar
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
 
         viewModel.getImageData().observe(this, { dailyImage -> renderData(dailyImage) })
@@ -36,15 +45,20 @@ class BasicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dailyImageView = view.findViewById(R.id.image_view)
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
     }
 
     private fun renderData(dailyImage: DailyImage) {
+        val titleTextView: TextView = view!!.findViewById(R.id.sheet_peek)
+        val explanationTextView: TextView = view!!.findViewById(R.id.sheet_content)
         when (dailyImage) {
             is DailyImage.Success -> {
                 val serverResponseData = dailyImage.serverResponseData
                 val url = serverResponseData.url
+                titleTextView.text=serverResponseData.title
+                explanationTextView.text=serverResponseData.explanation
                 if (url.isEmpty()) {
-                    // show error - empty link
+                    Toast.makeText(context,"Сегодня фото отсутствует!", Toast.LENGTH_LONG).show()
                 } else {
                     dailyImageView.load(url) {
                         lifecycle(this@BasicFragment)
@@ -54,11 +68,18 @@ class BasicFragment : Fragment() {
                 }
             }
             is DailyImage.Loading -> {
-                // show error
+                progressbar = view!!.findViewById (R.id.progress_bar)
+                progressbar.visibility
             }
             is DailyImage.Error -> {
-                // show error
+                Toast.makeText(context,"Фото не загружено", Toast.LENGTH_LONG).show()
             }
         }
     }
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+    }
+
 }
