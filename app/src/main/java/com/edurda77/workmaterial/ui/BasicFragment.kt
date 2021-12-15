@@ -18,6 +18,7 @@ import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImage
 import com.edurda77.workmaterial.model.DailyImageViewModel
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 import android.view.LayoutInflater as LayoutInflater1
@@ -92,15 +93,15 @@ class BasicFragment : Fragment() {
         viewModel.searchWiki(wikiTextView,inputLayout, view.context, savedInstanceState)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_favorite -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
-            R.id.action_search -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+            R.id.action_favorite -> Toast.makeText(context, "Избранное", Toast.LENGTH_SHORT).show()
+            R.id.action_search -> Toast.makeText(context, "Поиск фото", Toast.LENGTH_SHORT).show()
         }
 
         return super.onOptionsItemSelected(item)
@@ -109,6 +110,7 @@ class BasicFragment : Fragment() {
         val context = requireContext() as AppCompatActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
         setHasOptionsMenu(true)
-    }
+    }*/
+
 
 }
