@@ -50,7 +50,7 @@ class BasicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dailyImageView = view.findViewById(R.id.image_view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        setTextInput()
+        setTextInput(view, savedInstanceState)
     }
 
     private fun renderData(dailyImage: DailyImage) {
@@ -86,17 +86,9 @@ class BasicFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
     }
-    private fun setTextInput() {
-        val wikiTextView: TextView = view!!.findViewById(R.id.input_edit_text_wiki)
-        val inputLayout: TextInputLayout=view!!.findViewById(R.id.input_layout_wiki)
-        inputLayout.setEndIconOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW)
-            val url = "https://en.wikipedia.org/wiki/${wikiTextView.text}"
-            val uri = Uri.parse(url)
-            intent.data = uri
-
-            startActivity(intent)
-
-        }
+    private fun setTextInput(view: View, savedInstanceState: Bundle?) {
+        val wikiTextView: TextView = view.findViewById(R.id.input_edit_text_wiki)
+        val inputLayout: TextInputLayout=view.findViewById(R.id.input_layout_wiki)
+        viewModel.searchWiki(wikiTextView,inputLayout, view.context, savedInstanceState)
     }
 }
