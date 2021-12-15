@@ -1,8 +1,10 @@
 package com.edurda77.workmaterial.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -10,13 +12,15 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.FragmentActivity
+
 import androidx.fragment.app.viewModels
 import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImage
 import com.edurda77.workmaterial.model.DailyImageViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.textfield.TextInputLayout
+import android.view.LayoutInflater as LayoutInflater1
 
 class BasicFragment : Fragment() {
 
@@ -35,7 +39,7 @@ class BasicFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
+        inflater: LayoutInflater1,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -46,6 +50,7 @@ class BasicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dailyImageView = view.findViewById(R.id.image_view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        setTextInput()
     }
 
     private fun renderData(dailyImage: DailyImage) {
@@ -81,5 +86,17 @@ class BasicFragment : Fragment() {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
     }
+    private fun setTextInput() {
+        val wikiTextView: TextView = view!!.findViewById(R.id.input_edit_text_wiki)
+        val inputLayout: TextInputLayout=view!!.findViewById(R.id.input_layout_wiki)
+        inputLayout.setEndIconOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val url = "https://en.wikipedia.org/wiki/${wikiTextView.text}"
+            val uri = Uri.parse(url)
+            intent.data = uri
 
+            startActivity(intent)
+
+        }
+    }
 }
