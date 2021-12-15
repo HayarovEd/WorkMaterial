@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/bottom_sheet_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/botton_sheet"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="@dimen/margin_twin"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+    <TextView
+        android:id="@+id/sheet_peek"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/picture_size"
+        android:background="@color/purple_700"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/sheet_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@android:color/white" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
