@@ -3,14 +3,14 @@ package com.edurda77.workmaterial.ui
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.*
 
 import androidx.fragment.app.Fragment
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.fragment.app.viewModels
@@ -91,4 +91,24 @@ class BasicFragment : Fragment() {
         val inputLayout: TextInputLayout=view.findViewById(R.id.input_layout_wiki)
         viewModel.searchWiki(wikiTextView,inputLayout, view.context, savedInstanceState)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_favorite -> Toast.makeText(context, "Favourite", Toast.LENGTH_SHORT).show()
+            R.id.action_search -> Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+    private fun setBottomAppBar(view: View) {
+        val context = requireContext() as AppCompatActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
+    }
+
 }
