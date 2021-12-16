@@ -103,6 +103,11 @@ class BasicFragment : Fragment() {
         when (item.itemId) {
             R.id.action_favorite -> Toast.makeText(context, "Избранное", Toast.LENGTH_SHORT).show()
             R.id.action_search -> Toast.makeText(context, "Поиск фото", Toast.LENGTH_SHORT).show()
+            android.R.id.home -> {
+                val activity = requireActivity()
+                BottomNavigationDrawerFragment().show(activity.supportFragmentManager, "tag")
+            }
+
         }
 
         return super.onOptionsItemSelected(item)
