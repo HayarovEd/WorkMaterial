@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.model
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -14,6 +15,9 @@ import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DailyImageViewModel (
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
@@ -78,5 +82,11 @@ class DailyImageViewModel (
             startActivity(context, intent,savedInstanceState)
 
         }
+    }
+    @SuppressLint("SimpleDateFormat")
+    fun getDate() : String {
+        val cal: Calendar = Calendar.getInstance()
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return dateFormat.format(cal.add(Calendar.DATE, -0))
     }
 }
