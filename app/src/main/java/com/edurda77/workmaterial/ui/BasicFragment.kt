@@ -52,6 +52,7 @@ class BasicFragment : Fragment() {
         dailyImageView = view.findViewById(R.id.image_view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         setTextInput(view, savedInstanceState)
+        setBottomAppBar(view)
     }
 
     private fun renderData(dailyImage: DailyImage) {
@@ -74,8 +75,8 @@ class BasicFragment : Fragment() {
                 }
             }
             is DailyImage.Loading -> {
-                progressbar = view!!.findViewById (R.id.progress_bar)
-                progressbar.visibility
+                /*progressbar = view!!.findViewById (R.id.progress_bar)
+                progressbar.visibility*/
             }
             is DailyImage.Error -> {
                 Toast.makeText(context,"Фото не загружено", Toast.LENGTH_LONG).show()
@@ -93,7 +94,7 @@ class BasicFragment : Fragment() {
         viewModel.searchWiki(wikiTextView,inputLayout, view.context, savedInstanceState)
     }
 
-   /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
     }
@@ -110,7 +111,7 @@ class BasicFragment : Fragment() {
         val context = requireContext() as AppCompatActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
         setHasOptionsMenu(true)
-    }*/
+    }
 
 
 }

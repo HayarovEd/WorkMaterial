@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:background="@color/botton_sheet"
     app:behavior_hideable="true"
-    app:behavior_peekHeight="@dimen/margin_twin"
+    app:behavior_peekHeight="@dimen/double_picture_size"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
     <TextView
         android:id="@+id/sheet_peek"
