@@ -9,13 +9,8 @@ interface NasaApi {
     @GET("planetary/apod")
     fun getPictureOfTheDay(
         @Query("api_key") apiKey: String,
-        //@Query("date") date: String
+        //@Query("date") date: String - будет реализован
     ): Call<PODServerResponseData>
 
-    fun getPictureOfTheLastDay(
-        @Query("api_key") apiKey: String,
-        @Query("date") date: String,
-    ): Call<PODServerResponseData>
 
-    //fun getPictureOfTheBeforeYesterday(@Query("api_key") apiKey: String): Call<PODServerResponseData>
 }
