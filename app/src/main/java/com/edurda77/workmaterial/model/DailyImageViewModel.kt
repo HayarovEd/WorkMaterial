@@ -10,7 +10,8 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.edurda77.workmaterial.BuildConfig
+
+
 import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,9 +20,9 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DailyImageViewModel (
+class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
-    private val retrofitImpl: NasaRepoUseCaseImpl = NasaRepoUseCaseImpl(),
+    private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
 ) :
     ViewModel() {
 
@@ -33,7 +34,7 @@ class DailyImageViewModel (
     private fun sendServerRequest() {
         liveDataForViewToObserve.value = DailyImage.Loading(null)
 
-        val apiKey = BuildConfig.NASA_API_KEY
+        val apiKey = com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             DailyImage.Error(Throwable("You need API key"))
         } else {
@@ -51,8 +52,8 @@ class DailyImageViewModel (
                 handleImageResponse(response)
             }
 
-            override fun onFailure(call: Call<PODServerResponseData>, t: Throwable) {
-                liveDataForViewToObserve.value = DailyImage.Error(t)
+            override fun onFailure(call: Call<PODServerResponseData>, throwable: Throwable) {
+                liveDataForViewToObserve.value = DailyImage.Error(throwable)
             }
         }
 
@@ -72,19 +73,23 @@ class DailyImageViewModel (
             liveDataForViewToObserve.value = DailyImage.Error(Throwable(message))
         }
     }
-    fun searchWiki(wikiTextView: TextView, inputLayout: TextInputLayout,
-                           context: Context, savedInstanceState: Bundle?) {
+
+    fun searchWiki(
+        wikiTextView: TextView, inputLayout: TextInputLayout,
+        context: Context, savedInstanceState: Bundle?
+    ) {
         inputLayout.setEndIconOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW)
             val url = "https://ru.wikipedia.org/wiki/${wikiTextView.text}"
             val uri = Uri.parse(url)
             intent.data = uri
-            startActivity(context, intent,savedInstanceState)
+            startActivity(context, intent, savedInstanceState)
 
         }
     }
+
     @SuppressLint("SimpleDateFormat")
-    fun getDate() : String {
+    fun getDate(): String {
         val cal: Calendar = Calendar.getInstance()
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         return dateFormat.format(cal.add(Calendar.DATE, -0))

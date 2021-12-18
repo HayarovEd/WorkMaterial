@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.nasa.gov/"
 
-class NasaRepoUseCaseImpl  {
+class NasaServiceProvider  {
 
     fun getNasaService(): NasaApi {
         val retrofit = Retrofit.Builder()

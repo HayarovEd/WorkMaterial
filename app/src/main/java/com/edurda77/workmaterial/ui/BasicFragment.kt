@@ -29,7 +29,8 @@ class BasicFragment : Fragment() {
     private val viewModel by viewModels<DailyImageViewModel>()
 
     private lateinit var dailyImageView: ImageView
-    private lateinit var progressbar: ProgressBar
+    private lateinit var titleTextView: TextView
+    private lateinit var explanationTextView: TextView
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,23 +50,21 @@ class BasicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dailyImageView = view.findViewById(R.id.image_view)
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        initView()
         setTextInput(view, savedInstanceState)
         setBottomAppBar(view)
     }
 
     private fun renderData(dailyImage: DailyImage) {
-        val titleTextView: TextView = view!!.findViewById(R.id.sheet_peek)
-        val explanationTextView: TextView = view!!.findViewById(R.id.sheet_content)
+
         when (dailyImage) {
             is DailyImage.Success -> {
                 val serverResponseData = dailyImage.serverResponseData
                 val url = serverResponseData.url
-                titleTextView.text=serverResponseData.title
-                explanationTextView.text=serverResponseData.explanation
+                titleTextView.text = serverResponseData.title
+                explanationTextView.text = serverResponseData.explanation
                 if (url.isEmpty()) {
-                    Toast.makeText(context,"Сегодня фото отсутствует!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, "Сегодня фото отсутствует!", Toast.LENGTH_LONG).show()
                 } else {
                     dailyImageView.load(url) {
                         lifecycle(this@BasicFragment)
@@ -75,26 +74,27 @@ class BasicFragment : Fragment() {
                 }
             }
             is DailyImage.Loading -> {
-                /*progressbar = view!!.findViewById (R.id.progress_bar)
-                progressbar.visibility*/
+
             }
             is DailyImage.Error -> {
-                Toast.makeText(context,"Фото не загружено", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "Фото не загружено", Toast.LENGTH_LONG).show()
             }
         }
     }
+
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
     }
+
     private fun setTextInput(view: View, savedInstanceState: Bundle?) {
         val wikiTextView: TextView = view.findViewById(R.id.input_edit_text_wiki)
-        val inputLayout: TextInputLayout=view.findViewById(R.id.input_layout_wiki)
-        viewModel.searchWiki(wikiTextView,inputLayout, view.context, savedInstanceState)
+        val inputLayout: TextInputLayout = view.findViewById(R.id.input_layout_wiki)
+        viewModel.searchWiki(wikiTextView, inputLayout, view.context, savedInstanceState)
     }
 
-   override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.menu, menu)
     }
@@ -112,10 +112,18 @@ class BasicFragment : Fragment() {
 
         return super.onOptionsItemSelected(item)
     }
+
     private fun setBottomAppBar(view: View) {
         val context = requireContext() as AppCompatActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
         setHasOptionsMenu(true)
+    }
+
+    private fun initView() {
+        dailyImageView = view!!.findViewById(R.id.image_view)
+        setBottomSheetBehavior(view!!.findViewById(R.id.bottom_sheet_container))
+        titleTextView = view!!.findViewById(R.id.sheet_peek)
+        explanationTextView = view!!.findViewById(R.id.sheet_content)
     }
 
 
