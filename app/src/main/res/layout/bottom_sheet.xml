@@ -12,24 +12,16 @@
 
     <TextView
         android:id="@+id/sheet_peek"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/picture_size"
-        android:background="@color/purple_700"
-        android:gravity="center"
-        android:paddingStart="@dimen/margin_half"
-        android:paddingEnd="@dimen/margin_half"
-        android:textColor="@android:color/white"
+        style="@style/text_view_botton_sheet_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/sheet_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="@android:color/white"
+        style="@style/text_view_botton_sheet_discription"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
