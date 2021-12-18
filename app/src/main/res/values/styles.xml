@@ -29,7 +29,7 @@
         <item name="android:layout_height">700sp</item>
         <item name="android:gravity">center</item>
         <item name="android:scaleType">centerInside</item>
-
     </style>
+
 
 </resources>
