@@ -2,10 +2,35 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_container_custom_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.CustomActivity">
 
+    <Button
+        android:id="@+id/standart_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_half"
+        android:text="@string/standart_theme"
+        tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/space_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_half"
+        android:text="@string/space_theme"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="100dp" />
+
+    <Button
+        android:id="@+id/moon_theme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_half"
+        android:text="@string/moon_theme"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="200dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
