@@ -30,11 +30,16 @@ class CustomFragment : Fragment() {
         buttonSpace = view.findViewById(R.id.space_theme)
         buttonMoon = view.findViewById(R.id.moon_theme)
         setTheme()
+
     }
     private fun setTheme() {
         buttonStandart.setOnClickListener {
             R.style.Theme_WorkMaterial
             requireActivity().recreate()
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_WorkMaterial)
+
+            startActivity(intent)
         }
         buttonSpace.setOnClickListener {
             R.style.Theme_Space
@@ -48,6 +53,10 @@ class CustomFragment : Fragment() {
         buttonMoon.setOnClickListener {
             R.style.Theme_Moon
             requireActivity().recreate()
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_Moon)
+
+            startActivity(intent)
         }
     }
 }
