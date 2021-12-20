@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
@@ -9,12 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.edurda77.workmaterial.R
+import com.edurda77.workmaterial.ui.Utility.THEME_MOON
+import com.edurda77.workmaterial.ui.Utility.THEME_SPACE
+import com.edurda77.workmaterial.ui.Utility.THEME_STANDART
 
 
 class CustomFragment : Fragment() {
    private lateinit var buttonStandart: Button
     private lateinit var buttonSpace: Button
     private lateinit var buttonMoon: Button
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,31 +38,37 @@ class CustomFragment : Fragment() {
 
     }
     private fun setTheme() {
+
         buttonStandart.setOnClickListener {
-            R.style.Theme_WorkMaterial
+            //Utility.changeToTheme(view.context, THEME_STANDART)
+           /*R.style.Theme_WorkMaterial
             requireActivity().recreate()
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_WorkMaterial)
 
-            startActivity(intent)
+            startActivity(intent)*/
         }
         buttonSpace.setOnClickListener {
-            R.style.Theme_Space
+            //Utility.changeToTheme(view.context, THEME_SPACE)
+        /* R.style.Theme_Space
             requireActivity().recreate()
            val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_Space)
 
-            startActivity(intent)
+            startActivity(intent)*/
 
         }
         buttonMoon.setOnClickListener {
-            R.style.Theme_Moon
+            //Utility.changeToTheme(view.context, THEME_MOON)
+        /*R.style.Theme_Moon
             requireActivity().recreate()
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_Moon)
 
-            startActivity(intent)
+            startActivity(intent)*/
         }
     }
+
+
 }
 
