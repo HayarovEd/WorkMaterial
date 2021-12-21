@@ -1,24 +1,18 @@
 package com.edurda77.workmaterial.ui
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
-
-import androidx.fragment.app.Fragment
 import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImage
 import com.edurda77.workmaterial.model.DailyImageViewModel
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 import android.view.LayoutInflater as LayoutInflater1
@@ -37,7 +31,7 @@ class BasicFragment : Fragment() {
 
         super.onCreate(savedInstanceState)
 
-        viewModel.getImageData().observe(this, { dailyImage -> renderData(dailyImage) })
+        viewModel.getImageData(0).observe(this, { dailyImage -> renderData(dailyImage) })
     }
 
     override fun onCreateView(

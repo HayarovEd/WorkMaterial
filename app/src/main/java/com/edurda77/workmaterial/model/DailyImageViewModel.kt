@@ -26,23 +26,23 @@ class DailyImageViewModel(
 ) :
     ViewModel() {
 
-    fun getImageData(): LiveData<DailyImage> {
-        sendServerRequest()
+    fun getImageData(daysAgo: Int): LiveData<DailyImage> {
+        sendServerRequest(daysAgo)
         return liveDataForViewToObserve
     }
 
-    private fun sendServerRequest() {
+    private fun sendServerRequest(daysAgo: Int) {
         liveDataForViewToObserve.value = DailyImage.Loading(null)
 
         val apiKey = com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
             DailyImage.Error(Throwable("You need API key"))
         } else {
-            executeImageRequest(apiKey)
+            executeImageRequest(apiKey, daysAgo)
         }
     }
 
-    private fun executeImageRequest(apiKey: String) {
+    private fun executeImageRequest(apiKey: String, daysAgo: Int) {
         val callback = object : Callback<PODServerResponseData> {
 
             override fun onResponse(
@@ -57,7 +57,7 @@ class DailyImageViewModel(
             }
         }
 
-        retrofitImpl.getNasaService().getPictureOfTheDay(apiKey).enqueue(callback)
+        retrofitImpl.getNasaService().getPictureOfTheDay(apiKey, getDate(daysAgo)).enqueue(callback)
     }
 
     private fun handleImageResponse(response: Response<PODServerResponseData>) {
@@ -89,9 +89,10 @@ class DailyImageViewModel(
     }
 
     @SuppressLint("SimpleDateFormat")
-    fun getDate(): String {
+    fun getDate(daysAgo: Int): String {
         val cal: Calendar = Calendar.getInstance()
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
-        return dateFormat.format(cal.add(Calendar.DATE, -0))
+        cal.add(Calendar.DATE, -daysAgo)
+        return dateFormat.format(cal.time).toString()
     }
 }

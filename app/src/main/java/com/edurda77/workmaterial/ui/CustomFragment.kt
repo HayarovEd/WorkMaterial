@@ -10,9 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import com.edurda77.workmaterial.R
-import com.edurda77.workmaterial.ui.Utility.THEME_MOON
-import com.edurda77.workmaterial.ui.Utility.THEME_SPACE
-import com.edurda77.workmaterial.ui.Utility.THEME_STANDART
+
 
 
 class CustomFragment : Fragment() {
@@ -35,6 +33,7 @@ class CustomFragment : Fragment() {
         buttonSpace = view.findViewById(R.id.space_theme)
         buttonMoon = view.findViewById(R.id.moon_theme)
         setTheme()
+
 
     }
     private fun setTheme() {

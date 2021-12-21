@@ -2,24 +2,24 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/last"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.BasicFragment">
+    tools:context=".ui.LastFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/basic"
+            android:id="@+id/last_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/margin_half"
             android:paddingEnd="@dimen/margin_half">
 
             <ImageView
-                android:id="@+id/image_view"
+                android:id="@+id/image_last_view"
                 android:contentDescription="@string/photo_of_the_day_stub"
                 style="@style/image_view"
                 app:layout_constraintDimensionRatio="H,1:1"
@@ -28,12 +28,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout_wiki"
+                android:id="@+id/input_layout_last_day"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_full"
-                android:hint="@string/search_wiki"
+                android:hint="@string/set_data"
+                android:inputType="date"
                 app:counterEnabled="true"
                 app:counterMaxLength="30"
                 app:endIconCheckable="true"
@@ -41,12 +42,12 @@
                 app:endIconMode="custom"
 
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/image_view"
+                app:layout_constraintEnd_toStartOf="@id/image_last_view"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_edit_text_wiki"
+                    android:id="@+id/input_edit_last_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 

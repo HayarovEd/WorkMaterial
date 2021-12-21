@@ -2,13 +2,13 @@ package com.edurda77.workmaterial.ui
 
 import android.app.Activity
 import android.content.Intent
+const val THEME_STANDART = 1
+const val THEME_SPACE = 2
+const val THEME_MOON = 3
 
-
-object Utility {
+class  Utility {
     private var sTheme = 0
-    const val THEME_STANDART = 1
-    const val THEME_SPACE = 2
-    const val THEME_MOON = 3
+
 
     fun changeToTheme(activity: Activity, theme: Int) {
         sTheme = theme
