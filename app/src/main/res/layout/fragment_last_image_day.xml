@@ -34,9 +34,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/margin_full"
                 android:hint="@string/set_data"
-                android:inputType="date"
+                android:inputType="number"
                 app:counterEnabled="true"
                 app:counterMaxLength="30"
+
                 app:endIconCheckable="true"
                 app:endIconDrawable="@drawable/ic_wikipedia"
                 app:endIconMode="custom"

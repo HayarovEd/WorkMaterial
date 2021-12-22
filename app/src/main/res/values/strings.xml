@@ -10,6 +10,6 @@
     <string name="space_theme">Тема космоса</string>
     <string name="moon_theme">Лунная тема</string>
     <string name="start_custom">Настройки</string>
-    <string name="set_data">укажите дату</string>
+    <string name="set_data">показать фото дня за сколько дней назад</string>
     <string name="last_image_day">Прошлые фото дня</string>
 </resources>

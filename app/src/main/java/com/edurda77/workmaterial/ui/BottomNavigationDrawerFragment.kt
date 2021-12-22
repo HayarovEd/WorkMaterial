@@ -27,6 +27,7 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         navigationView = view.findViewById(R.id.navigation_view)
 
+
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_one -> {
@@ -36,7 +37,13 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     ft?.commit()
 
                 }
-                R.id.navigation_two -> Toast.makeText(context, "2", Toast.LENGTH_SHORT).show()
+                R.id.navigation_two -> {
+                    val createCustomFragment = LastFragment()
+                    val ft = fragmentManager?.beginTransaction()
+                    ft?.replace(R.id.fragment_container_view, createCustomFragment)
+                    ft?.commit()
+
+                }
             }
             true
         }
