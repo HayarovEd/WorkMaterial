@@ -30,6 +30,11 @@
         <item name="android:gravity">center</item>
         <item name="android:scaleType">centerInside</item>
     </style>
+    <style name="AppColorsDefault">
+        <item name="colorPrimary">#4CAF50</item>
+        <item name="colorPrimaryDark">#888282</item>
+        <item name="colorAccent">#03A9F4</item>
+    </style>
 
 
 </resources>
