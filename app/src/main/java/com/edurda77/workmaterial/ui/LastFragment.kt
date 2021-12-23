@@ -34,7 +34,7 @@ class LastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(view)
         setDayAgo(view)
         setBottomAppBar(view)
     }
@@ -65,11 +65,11 @@ class LastFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    private fun initView() {
-        dailyImageView = view!!.findViewById(R.id.image_last_view)
-        setBottomSheetBehavior(view!!.findViewById(R.id.bottom_sheet_container))
-        titleTextView = view!!.findViewById(R.id.sheet_peek)
-        explanationTextView = view!!.findViewById(R.id.sheet_content)
+    private fun initView(view:View) {
+        dailyImageView = view.findViewById(R.id.image_last_view)
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        titleTextView = view.findViewById(R.id.sheet_peek)
+        explanationTextView = view.findViewById(R.id.sheet_content)
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {

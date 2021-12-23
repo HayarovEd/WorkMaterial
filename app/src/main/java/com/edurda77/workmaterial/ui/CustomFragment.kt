@@ -12,9 +12,8 @@ import android.widget.Button
 import com.edurda77.workmaterial.R
 
 
-
 class CustomFragment : Fragment() {
-   private lateinit var buttonStandart: Button
+    private lateinit var buttonStandart: Button
     private lateinit var buttonSpace: Button
     private lateinit var buttonMoon: Button
 
@@ -36,36 +35,34 @@ class CustomFragment : Fragment() {
 
 
     }
+
     private fun setTheme() {
 
-        buttonStandart.setOnClickListener {
-            //Utility.changeToTheme(view.context, THEME_STANDART)
-           /*R.style.Theme_WorkMaterial
-            requireActivity().recreate()
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_WorkMaterial)
 
-            startActivity(intent)*/
+        buttonStandart.setOnClickListener {
+            Utility.changeToTheme(requireActivity(), THEME_STANDART)
+            val intent = requireActivity().intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            requireActivity().finish()
+            startActivity(intent)
         }
         buttonSpace.setOnClickListener {
-            //Utility.changeToTheme(view.context, THEME_SPACE)
-        /* R.style.Theme_Space
-            requireActivity().recreate()
-           val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_Space)
+            Utility.changeToTheme(requireActivity(), THEME_SPACE)
+            val intent = requireActivity().intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            requireActivity().finish()
+            startActivity(intent)
 
-            startActivity(intent)*/
 
         }
         buttonMoon.setOnClickListener {
-            //Utility.changeToTheme(view.context, THEME_MOON)
-        /*R.style.Theme_Moon
-            requireActivity().recreate()
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra(Resources.Theme::class.java.simpleName, R.style.Theme_Moon)
-
-            startActivity(intent)*/
+            Utility.changeToTheme(requireActivity(), THEME_MOON)
+            val intent = requireActivity().intent
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            requireActivity().finish()
+            startActivity(intent)
         }
+
     }
 
 

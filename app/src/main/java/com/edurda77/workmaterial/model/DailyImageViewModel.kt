@@ -90,7 +90,7 @@ class DailyImageViewModel(
 
     @SuppressLint("SimpleDateFormat")
     fun getDate(daysAgo: Int): String {
-        val cal: Calendar = Calendar.getInstance()
+        val cal  = Calendar.getInstance()
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         cal.add(Calendar.DATE, -daysAgo)
         return dateFormat.format(cal.time).toString()

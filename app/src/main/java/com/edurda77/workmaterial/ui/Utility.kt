@@ -6,7 +6,7 @@ const val THEME_STANDART = 1
 const val THEME_SPACE = 2
 const val THEME_MOON = 3
 
-class  Utility {
+object  Utility {
     private var sTheme = 0
 
 
