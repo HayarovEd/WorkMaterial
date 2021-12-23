@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setTheme(R.style.Theme_Moon)
+        theme.applyStyle(R.style.AppColorsDefault, true)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         if (savedInstanceState == null) {

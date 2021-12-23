@@ -50,7 +50,7 @@ class BasicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(view)
         setTextInput(view, savedInstanceState)
         setBottomAppBar(view)
     }
@@ -119,11 +119,11 @@ class BasicFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    private fun initView() {
-        dailyImageView = view!!.findViewById(R.id.image_view)
-        setBottomSheetBehavior(view!!.findViewById(R.id.bottom_sheet_container))
-        titleTextView = view!!.findViewById(R.id.sheet_peek)
-        explanationTextView = view!!.findViewById(R.id.sheet_content)
+    private fun initView(view:View) {
+        dailyImageView = view.findViewById(R.id.image_view)
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        titleTextView = view.findViewById(R.id.sheet_peek)
+        explanationTextView = view.findViewById(R.id.sheet_content)
     }
 
 
