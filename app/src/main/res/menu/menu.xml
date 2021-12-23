@@ -2,14 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_favorite"
-        android:title="@string/favorite"
-        android:icon="@drawable/ic_favorite"
+        android:id="@+id/image_earth"
+        android:title="@string/earth"
+        android:icon="@drawable/ic_earth"
+        app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_search"
-        android:title="@string/search"
-        android:icon="@drawable/ic_search"
+        android:id="@+id/image_mars"
+        android:title="@string/mars"
+        android:icon="@drawable/ic_mars"
+        app:labelVisibilityMode="labeled"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/image_moon"
+        android:title="@string/moon"
+        android:icon="@drawable/ic_moon"
+        app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
 
 </menu>

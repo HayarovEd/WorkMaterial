@@ -8,4 +8,5 @@
     <string name="moon_theme">Лунная тема</string>
     <string name="start_custom">Настройки</string>
     <string name="set_data">укажите дату</string>
+    <string name="moon">Луна</string>
 </resources>

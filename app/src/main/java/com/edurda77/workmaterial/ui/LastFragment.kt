@@ -47,13 +47,31 @@ class LastFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_favorite -> Toast.makeText(context, "Избранное", Toast.LENGTH_SHORT).show()
-            R.id.action_search -> Toast.makeText(context, "Поиск фото", Toast.LENGTH_SHORT).show()
+            R.id.image_earth -> {
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container_view, EarthFragment())
+                    ?.commitAllowingStateLoss()
+
+            }
+
+            R.id.image_mars -> {
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container_view, MarsFragment())
+                    ?.commitAllowingStateLoss()
+
+            }
+
+            R.id.image_moon -> {
+                fragmentManager?.beginTransaction()
+                    ?.replace(R.id.fragment_container_view, MoonFragment())
+                    ?.commitAllowingStateLoss()
+
+            }
+
             android.R.id.home -> {
                 val activity = requireActivity()
                 BottomNavigationDrawerFragment().show(activity.supportFragmentManager, "tag")
             }
-
         }
 
         return super.onOptionsItemSelected(item)

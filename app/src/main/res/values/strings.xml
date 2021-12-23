@@ -4,12 +4,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="photo_of_the_day_stub">Фото дня</string>
     <string name="search_wiki">Поиск в википедии</string>
-    <string name="favorite">Лучшие</string>
-    <string name="search">Поиск фото</string>
+    <string name="earth">Земля</string>
+    <string name="mars">Марс</string>
     <string name="standart_theme">Стандартная тема</string>
     <string name="space_theme">Тема космоса</string>
     <string name="moon_theme">Лунная тема</string>
     <string name="start_custom">Настройки</string>
     <string name="set_data">показать фото дня за сколько дней назад</string>
     <string name="last_image_day">Прошлые фото дня</string>
+    <string name="moon">Луна</string>
 </resources>
