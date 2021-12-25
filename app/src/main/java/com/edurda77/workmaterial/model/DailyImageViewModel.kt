@@ -22,8 +22,7 @@ import java.util.*
 
 class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
-    private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
-) :
+    private val retrofitImpl: NasaServiceProvider = NasaServiceProvider()) :
     ViewModel() {
 
     fun getImageData(): LiveData<DailyImage> {

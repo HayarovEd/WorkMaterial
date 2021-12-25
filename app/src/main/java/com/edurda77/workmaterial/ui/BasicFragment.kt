@@ -119,7 +119,7 @@ class BasicFragment : Fragment() {
         setHasOptionsMenu(true)
     }
 
-    private fun initView(view:View) {
+    private fun initView(view: View) {
         dailyImageView = view.findViewById(R.id.image_view)
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         titleTextView = view.findViewById(R.id.sheet_peek)
