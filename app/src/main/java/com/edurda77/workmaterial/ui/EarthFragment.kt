@@ -24,7 +24,7 @@ class EarthFragment : Fragment() {
         Thread {
             viewModel.getEarthImageToday()
             val serverResponseData = viewModel.getEarthImageToday()[0]
-            val url = viewModel.getStringFromDate()+serverResponseData.image+".jpg"
+            val url = viewModel.getStringFromDate(1) + serverResponseData.image + ".jpg"
             bodySpaceImageView.load(url) {
                 lifecycle(this@EarthFragment)
                 error(R.drawable.ic_image_error)
@@ -40,6 +40,7 @@ class EarthFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_earth, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
@@ -47,11 +48,7 @@ class EarthFragment : Fragment() {
     }
 
 
-
-
-
-
-    private fun initView(view:View) {
+    private fun initView(view: View) {
         bodySpaceImageView = view.findViewById(R.id.image_earth)
 
 

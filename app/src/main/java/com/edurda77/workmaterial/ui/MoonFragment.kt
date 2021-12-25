@@ -13,8 +13,6 @@ class MoonFragment : Fragment() {
     private lateinit var bodySpaceImageView: ImageView
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,21 +20,14 @@ class MoonFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_moon, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(view)
     }
 
 
-
-
-
-
-
-
-
-
-    private fun initView(view:View) {
+    private fun initView(view: View) {
         bodySpaceImageView = view.findViewById(R.id.image_moon)
 
 
