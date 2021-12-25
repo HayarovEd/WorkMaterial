@@ -13,6 +13,7 @@ import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImage
 import com.edurda77.workmaterial.model.DailyImageViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 
@@ -20,9 +21,7 @@ class LastFragment : Fragment() {
 
     private val viewModel by viewModels<DailyImageViewModel>()
     private lateinit var dailyImageView: ImageView
-    private lateinit var titleTextView: TextView
-    private lateinit var explanationTextView: TextView
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
 
 
     override fun onCreateView(
@@ -34,9 +33,10 @@ class LastFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initView(view)
         setDayAgo(view)
-        setBottomAppBar(view)
+
     }
 
 
@@ -45,56 +45,17 @@ class LastFragment : Fragment() {
         inflater.inflate(R.menu.menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.image_earth -> {
-                fragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_container_view, EarthFragment())
-                    ?.commitAllowingStateLoss()
 
-            }
 
-            R.id.image_mars -> {
-                fragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_container_view, MarsFragment())
-                    ?.commitAllowingStateLoss()
 
-            }
-
-            R.id.image_moon -> {
-                fragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_container_view, MoonFragment())
-                    ?.commitAllowingStateLoss()
-
-            }
-
-            android.R.id.home -> {
-                val activity = requireActivity()
-                BottomNavigationDrawerFragment().show(activity.supportFragmentManager, "tag")
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun setBottomAppBar(view: View) {
-        val context = requireContext() as AppCompatActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-        setHasOptionsMenu(true)
-    }
 
     private fun initView(view:View) {
         dailyImageView = view.findViewById(R.id.image_last_view)
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
-        titleTextView = view.findViewById(R.id.sheet_peek)
-        explanationTextView = view.findViewById(R.id.sheet_content)
-    }
 
-    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
     }
+
+
 
     private fun renderData(dailyImage: DailyImage) {
 
@@ -102,8 +63,6 @@ class LastFragment : Fragment() {
             is DailyImage.Success -> {
                 val serverResponseData = dailyImage.serverResponseData
                 val url = serverResponseData.url
-                titleTextView.text = serverResponseData.title
-                explanationTextView.text = serverResponseData.explanation
                 if (url.isEmpty()) {
                     Toast.makeText(context, "Фото отсутствует!", Toast.LENGTH_LONG).show()
                 } else {
