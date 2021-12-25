@@ -20,14 +20,16 @@ class MarsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        /*viewModel.getMarsImageToday()
-        val serverResponseData = viewModel.getMarsImageToday()[0]
-        val url = serverResponseData.imgSrc
-        bodySpaceImageView.load(url) {
-            lifecycle(this@MarsFragment)
-            error(R.drawable.ic_image_error)
-            placeholder(R.drawable.ic_no_photo)
-        }*/
+        Thread {
+            viewModel.getMarsImageToday()
+            val serverResponseData = viewModel.getMarsImageToday()[0]
+            val url = serverResponseData.imgSrc
+            bodySpaceImageView.load(url) {
+                lifecycle(this@MarsFragment)
+                error(R.drawable.ic_image_error)
+                placeholder(R.drawable.ic_no_photo)
+            }
+        }.start()
     }
 
     override fun onCreateView(
@@ -37,6 +39,7 @@ class MarsFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_mars, container, false)
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -45,11 +48,7 @@ class MarsFragment : Fragment() {
     }
 
 
-
-
-
-
-    private fun initView(view:View) {
+    private fun initView(view: View) {
         bodySpaceImageView = view.findViewById(R.id.image_mars)
 
 
