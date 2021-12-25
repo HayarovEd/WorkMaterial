@@ -7,18 +7,30 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.viewModels
+import coil.api.load
 import com.edurda77.workmaterial.R
+import com.edurda77.workmaterial.model.DailyImageViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.textfield.TextInputLayout
 
 
 class EarthFragment : Fragment() {
     private lateinit var bodySpaceImageView: ImageView
-
+    private val viewModel by viewModels<DailyImageViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Thread {
+            viewModel.getEarthImageToday()
+            val serverResponseData = viewModel.getEarthImageToday()[0]
+            val url = viewModel.getStringFromDate()+serverResponseData.image+".jpg"
+            bodySpaceImageView.load(url) {
+                lifecycle(this@EarthFragment)
+                error(R.drawable.ic_image_error)
+                placeholder(R.drawable.ic_no_photo)
+            }
+        }.start()
     }
 
     override fun onCreateView(

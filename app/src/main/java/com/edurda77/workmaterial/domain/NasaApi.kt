@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.domain
 
+import com.edurda77.workmaterial.model.Earth
 import com.edurda77.workmaterial.model.ImagesMars
 import com.edurda77.workmaterial.model.Mars
 import com.edurda77.workmaterial.model.PODServerResponseData
@@ -19,6 +20,10 @@ interface NasaApi {
         @Query("api_key") apiKey: String
 
     ): Call<ImagesMars>
+    @GET("api/natural")
+    fun getEarthImage(
 
+    ): Call<List<Earth>>
 }
+
 

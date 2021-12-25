@@ -8,6 +8,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.nasa.gov/"
+const val BASE_URL2 = "https://epic.gsfc.nasa.gov/"
 
 class NasaServiceProvider {
 
@@ -20,7 +21,15 @@ class NasaServiceProvider {
 
         return retrofit.create(NasaApi::class.java)
     }
+    fun getNasaServiceEpic(): NasaApi {
+        val retrofit = Retrofit.Builder()
+            .baseUrl(BASE_URL2)
+            .client(createOkHttpClient())
+            .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+            .build()
 
+        return retrofit.create(NasaApi::class.java)
+    }
 
 
     private fun createOkHttpClient(): OkHttpClient {

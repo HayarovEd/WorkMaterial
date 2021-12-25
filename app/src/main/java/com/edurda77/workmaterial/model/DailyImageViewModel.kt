@@ -91,7 +91,7 @@ class DailyImageViewModel(
     }
 
     fun getMarsImageToday(): List<Mars> {
-        val currentDate = getDate(1)
+        val currentDate = getDate(0)
         val liveDataForMars: MutableList<Mars> = emptyList<Mars>().toMutableList()
         val images: ImagesMars? = retrofitImpl.getNasaService()
             .getMarsImage(currentDate,NASA_API_KEY).execute().body()
@@ -100,7 +100,24 @@ class DailyImageViewModel(
         }
         return liveDataForMars
     }
+    fun getEarthImageToday() : List<Earth>{
 
+        val liveDataForEarth: MutableList<Earth> = emptyList<Earth>().toMutableList()
+        val images = retrofitImpl.getNasaServiceEpic().getEarthImage().execute().body()
+        images?.forEach {
+            liveDataForEarth.add(it)
+        }
+        return liveDataForEarth
+    }
+    @SuppressLint("SimpleDateFormat")
+    fun getStringFromDate(): String {
+        val startUrl = "https://epic.gsfc.nasa.gov/archive/natural/"
+        val addUrl="/jpg/"
+        val cal = Calendar.getInstance()
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd")
+        cal.add(Calendar.DATE, -1)
+        return startUrl+dateFormat.format(cal.time).toString()+addUrl
+    }
     @SuppressLint("SimpleDateFormat")
     fun getDate(daysAgo: Int): String {
         val cal = Calendar.getInstance()
@@ -108,5 +125,6 @@ class DailyImageViewModel(
         cal.add(Calendar.DATE, -daysAgo)
         return dateFormat.format(cal.time).toString()
     }
+
 
 }
