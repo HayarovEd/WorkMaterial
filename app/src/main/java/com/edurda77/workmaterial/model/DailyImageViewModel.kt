@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
 
 
 import com.google.android.material.textfield.TextInputLayout
@@ -22,6 +23,7 @@ import java.util.*
 
 class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
+
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
 ) :
     ViewModel() {
@@ -34,7 +36,7 @@ class DailyImageViewModel(
     private fun sendServerRequest(daysAgo: Int) {
         liveDataForViewToObserve.value = DailyImage.Loading(null)
 
-        val apiKey = com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
+        val apiKey = NASA_API_KEY
         if (apiKey.isBlank()) {
             DailyImage.Error(Throwable("You need API key"))
         } else {
@@ -88,11 +90,23 @@ class DailyImageViewModel(
         }
     }
 
+    fun getMarsImageToday(): List<Mars> {
+        val currentDate = getDate(1)
+        val liveDataForMars: MutableList<Mars> = emptyList<Mars>().toMutableList()
+        val images: ImagesMars? = retrofitImpl.getNasaService()
+            .getMarsImage(currentDate,NASA_API_KEY).execute().body()
+        images?.photos?.forEach {
+            liveDataForMars.add(it)
+        }
+        return liveDataForMars
+    }
+
     @SuppressLint("SimpleDateFormat")
     fun getDate(daysAgo: Int): String {
-        val cal  = Calendar.getInstance()
+        val cal = Calendar.getInstance()
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         cal.add(Calendar.DATE, -daysAgo)
         return dateFormat.format(cal.time).toString()
     }
+
 }

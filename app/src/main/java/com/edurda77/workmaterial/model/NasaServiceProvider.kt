@@ -1,4 +1,5 @@
 package com.edurda77.workmaterial.model
+
 import com.edurda77.workmaterial.domain.NasaApi
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -8,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://api.nasa.gov/"
 
-class NasaServiceProvider  {
+class NasaServiceProvider {
 
     fun getNasaService(): NasaApi {
         val retrofit = Retrofit.Builder()
@@ -19,6 +20,8 @@ class NasaServiceProvider  {
 
         return retrofit.create(NasaApi::class.java)
     }
+
+
 
     private fun createOkHttpClient(): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
