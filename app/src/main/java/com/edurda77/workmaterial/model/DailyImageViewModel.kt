@@ -96,7 +96,7 @@ class DailyImageViewModel(
         }
     }
     fun searchPhotos(searchTextView:TextView, inputLayout: TextInputLayout, fragment: Fragment,
-                     bodySpaceImageView:ImageView, viewModel:DailyImageViewModel){
+                     bodySpaceImageView:ImageView, viewModel: DailyImageViewModel){
         val search = searchTextView.text.toString()
         inputLayout.setEndIconOnClickListener {
             Thread {

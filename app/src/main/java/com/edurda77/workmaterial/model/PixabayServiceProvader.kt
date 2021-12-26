@@ -1,11 +1,9 @@
 package com.edurda77.workmaterial.model
 
-import com.edurda77.workmaterial.domain.NasaApi
 import com.edurda77.workmaterial.domain.PixabayApi
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.intellij.lang.annotations.Language
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
