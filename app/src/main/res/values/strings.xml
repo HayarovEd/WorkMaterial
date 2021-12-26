@@ -14,4 +14,6 @@
     <string name="set_data">показать фото дня за сколько дней назад</string>
     <string name="last_image_day">Архив</string>
     <string name="moon">Луна</string>
+    <string name="foto">Фото</string>
+    <string name="search_internet">Поиск фото в Интернете</string>
 </resources>

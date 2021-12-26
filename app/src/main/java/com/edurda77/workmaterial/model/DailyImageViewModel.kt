@@ -5,12 +5,17 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import coil.api.load
 import com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
+import com.edurda77.workmaterial.BuildConfig.PIXABAY_API_KEY
+import com.edurda77.workmaterial.R
 
 
 import com.google.android.material.textfield.TextInputLayout
@@ -25,6 +30,7 @@ class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
 
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
+    private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
 ) :
     ViewModel() {
 
@@ -89,9 +95,25 @@ class DailyImageViewModel(
 
         }
     }
+    fun searchPhotos(searchTextView:TextView, inputLayout: TextInputLayout, fragment: Fragment,
+                     bodySpaceImageView:ImageView, viewModel:DailyImageViewModel){
+        val search = searchTextView.text.toString()
+        inputLayout.setEndIconOnClickListener {
+            Thread {
+                val serverResponseData = viewModel.getPhoto(search)[1]
+                val url = serverResponseData.pageURL
+                bodySpaceImageView.load(url) {
+                    lifecycle(fragment)
+                    error(R.drawable.ic_image_error)
+                    placeholder(R.drawable.ic_no_photo)
+                }
+            }.start()
+
+        }
+    }
 
     fun getMarsImageToday(): List<Mars> {
-        val currentDate = getDate(1)
+        val currentDate = getDate(5)
         val liveDataForMars: MutableList<Mars> = emptyList<Mars>().toMutableList()
         val images: ImagesMars? = retrofitImpl.getNasaService()
             .getMarsImage(currentDate,NASA_API_KEY).execute().body()
@@ -108,6 +130,15 @@ class DailyImageViewModel(
             liveDataForEarth.add(it)
         }
         return liveDataForEarth
+    }
+    fun getPhoto(query:String): List<Photo> {
+        val liveDataForSearchPhoto: MutableList<Photo> = emptyList<Photo>().toMutableList()
+        val images: SearchedPhoto? = retrofitPixaImpl.getPixabayService()
+            .getPhoto(PIXABAY_API_KEY, query,LANGUAGE).execute().body()
+        images?.hits?.forEach {
+            liveDataForSearchPhoto.add(it)
+        }
+        return liveDataForSearchPhoto
     }
     @SuppressLint("SimpleDateFormat")
     fun getStringFromDate(daysAgo: Int): String {

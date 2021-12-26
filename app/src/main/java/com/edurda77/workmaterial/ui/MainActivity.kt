@@ -1,26 +1,22 @@
 package com.edurda77.workmaterial.ui
 
 
-import android.content.res.Resources
-import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.edurda77.workmaterial.R
-import com.edurda77.workmaterial.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+
     private lateinit var bottomNavigaion: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding = ActivityMainBinding.inflate(layoutInflater)
+
         setTheme(R.style.Theme_Moon)
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_main)
         bottomNavigaion = findViewById(R.id.bottom_navigation_view)
         bottomNavigaion.itemIconTintList = null
         setMenu()
@@ -56,11 +52,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                R.id.image_moon -> {
+                R.id.image_search -> {
                     item.isChecked = true
                     supportFragmentManager.commit {
                         setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,MoonFragment())
+                        replace(R.id.fragment_container_view,PhotoFragment())
                     }
 
 

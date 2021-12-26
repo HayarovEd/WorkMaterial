@@ -33,7 +33,7 @@ class BasicFragment : Fragment() {
 
         super.onCreate(savedInstanceState)
 
-        viewModel.getImageData(0).observe(this, { dailyImage -> renderData(dailyImage) })
+        viewModel.getImageData(1).observe(this, { dailyImage -> renderData(dailyImage) })
     }
 
     override fun onCreateView(

@@ -20,9 +20,9 @@
         app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/image_moon"
-        android:title="@string/moon"
-        android:icon="@drawable/ic_moon"
+        android:id="@+id/image_search"
+        android:title="@string/foto"
+        android:icon="@drawable/ic_search"
         app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
     <item

@@ -28,6 +28,8 @@ android {
         properties.load(project.rootProject.file("apikey.properties").newDataInputStream())
         def nasaApiKey  = properties.getProperty("NASA_API_KEY", "")
         it.buildConfigField "String", "NASA_API_KEY", nasaApiKey
+        def pixabayApiKey  = properties.getProperty("PIXABAY_API_KEY", "")
+        it.buildConfigField "String", "PIXABAY_API_KEY", pixabayApiKey
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

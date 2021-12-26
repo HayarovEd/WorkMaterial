@@ -11,9 +11,7 @@
         android:roundIcon="@drawable/outer_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkMaterial">
-        <activity
-            android:name=".ui.CustomActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">
