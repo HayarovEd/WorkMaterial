@@ -27,13 +27,13 @@ class BasicFragment : Fragment() {
     private val viewModel by viewModels<DailyImageViewModel>()
 
     private lateinit var dailyImageView: ImageView
-
+    private lateinit var dailyTextExplanation: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        viewModel.getImageData(1).observe(this, { dailyImage -> renderData(dailyImage) })
+        viewModel.getImageData(0).observe(this, { dailyImage -> renderData(dailyImage) })
     }
 
     override fun onCreateView(
@@ -47,7 +47,7 @@ class BasicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dailyImageView = view.findViewById(R.id.image_view)
-
+        dailyTextExplanation  = view.findViewById(R.id.text_explanation)
         setTextInput(view, savedInstanceState)
 
 
@@ -59,7 +59,7 @@ class BasicFragment : Fragment() {
             is DailyImage.Success -> {
                 val serverResponseData = dailyImage.serverResponseData
                 val url = serverResponseData.url
-
+                dailyTextExplanation.text = serverResponseData.explanation
                 if (url.isEmpty()) {
                     Toast.makeText(context, "Сегодня фото отсутствует!", Toast.LENGTH_LONG).show()
                 } else {
