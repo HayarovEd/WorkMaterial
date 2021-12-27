@@ -100,7 +100,7 @@ class DailyImageViewModel(
         val search = searchTextView.text.toString()
         inputLayout.setEndIconOnClickListener {
             Thread {
-                val serverResponseData = viewModel.getPhoto(search)[1]
+                val serverResponseData = viewModel.getPhoto(search)[0]
                 val url = serverResponseData.pageURL
                 bodySpaceImageView.load(url) {
                     lifecycle(fragment)
@@ -113,7 +113,7 @@ class DailyImageViewModel(
     }
 
     fun getMarsImageToday(): List<Mars> {
-        val currentDate = getDate(5)
+        val currentDate = getDate(1)
         val liveDataForMars: MutableList<Mars> = emptyList<Mars>().toMutableList()
         val images: ImagesMars? = retrofitImpl.getNasaService()
             .getMarsImage(currentDate,NASA_API_KEY).execute().body()
