@@ -3,6 +3,7 @@ package com.edurda77.workmaterial.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentTransaction
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.edurda77.workmaterial.R
@@ -29,35 +30,38 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
     private fun setMenu() {
         bottomNavigaion.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.image_earth -> {
                     item.isChecked = true
-                    supportFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,EarthFragment())
-
-                    }
-
+                    supportFragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_view, EarthFragment())
+                        .commit()
                 }
 
                 R.id.image_mars -> {
                     item.isChecked = true
-                    supportFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,MarsFragment())
-
-
-                    }
+                    supportFragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                        .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_view, MarsFragment())
+                        .commit()
                 }
 
                 R.id.image_search -> {
                     item.isChecked = true
-                    supportFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,PhotoFragment())
-                    }
+                    supportFragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_view, PhotoFragment())
+                        .commit()
 
 
                 }
@@ -66,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                     item.isChecked = true
                     supportFragmentManager.commit {
                         setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,BasicFragment())
+                        replace(R.id.fragment_container_view, BasicFragment())
 
                     }
 
@@ -74,11 +78,12 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.image_last_day -> {
                     item.isChecked = true
-                    supportFragmentManager.commit {
-                        setReorderingAllowed(true)
-                        replace(R.id.fragment_container_view,LastFragment())
-
-                    }
+                    supportFragmentManager.beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+                        .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                        .setReorderingAllowed(true)
+                        .replace(R.id.fragment_container_view, LastFragment())
+                        .commit()
 
 
                 }
