@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +16,8 @@ import coil.api.load
 import com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
 import com.edurda77.workmaterial.BuildConfig.PIXABAY_API_KEY
 import com.edurda77.workmaterial.R
+import com.edurda77.workmaterial.ui.AddNoteFragment
+import com.edurda77.workmaterial.ui.PhotoFragment
 
 
 import com.google.android.material.textfield.TextInputLayout
@@ -95,8 +97,11 @@ class DailyImageViewModel(
 
         }
     }
-    fun searchPhotos(searchTextView:TextView, inputLayout: TextInputLayout, fragment: Fragment,
-                     bodySpaceImageView:ImageView, viewModel: DailyImageViewModel){
+
+    fun searchPhotos(
+        searchTextView: TextView, inputLayout: TextInputLayout, fragment: Fragment,
+        bodySpaceImageView: ImageView, viewModel: DailyImageViewModel
+    ) {
         val search = searchTextView.text.toString()
         inputLayout.setEndIconOnClickListener {
             Thread {
@@ -116,13 +121,14 @@ class DailyImageViewModel(
         val currentDate = getDate(1)
         val liveDataForMars: MutableList<Mars> = emptyList<Mars>().toMutableList()
         val images: ImagesMars? = retrofitImpl.getNasaService()
-            .getMarsImage(currentDate,NASA_API_KEY).execute().body()
+            .getMarsImage(currentDate, NASA_API_KEY).execute().body()
         images?.photos?.forEach {
             liveDataForMars.add(it)
         }
         return liveDataForMars
     }
-    fun getEarthImageToday() : List<Earth>{
+
+    fun getEarthImageToday(): List<Earth> {
 
         val liveDataForEarth: MutableList<Earth> = emptyList<Earth>().toMutableList()
         val images = retrofitImpl.getNasaServiceEpic().getEarthImage().execute().body()
@@ -131,31 +137,53 @@ class DailyImageViewModel(
         }
         return liveDataForEarth
     }
-    fun getPhoto(query:String): List<Photo> {
+
+    fun getPhoto(query: String): List<Photo> {
         val liveDataForSearchPhoto: MutableList<Photo> = emptyList<Photo>().toMutableList()
         val images: SearchedPhoto? = retrofitPixaImpl.getPixabayService()
-            .getPhoto(PIXABAY_API_KEY, query,LANGUAGE).execute().body()
+            .getPhoto(PIXABAY_API_KEY, query, LANGUAGE).execute().body()
         images?.hits?.forEach {
             liveDataForSearchPhoto.add(it)
         }
         return liveDataForSearchPhoto
     }
+
     @SuppressLint("SimpleDateFormat")
     fun getStringFromDate(daysAgo: Int): String {
         val startUrl = "https://epic.gsfc.nasa.gov/archive/natural/"
-        val addUrl="/jpg/"
+        val addUrl = "/jpg/"
         val dateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd")
-        return startUrl+dateFormat.format(getTodayDate(daysAgo).time).toString()+addUrl
+        return startUrl + dateFormat.format(getTodayDate(daysAgo).time).toString() + addUrl
     }
+
     @SuppressLint("SimpleDateFormat")
     fun getDate(daysAgo: Int): String {
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd")
         return dateFormat.format(getTodayDate(daysAgo).time).toString()
     }
-    private fun getTodayDate(daysAgo: Int): Calendar{
+
+    private fun getTodayDate(daysAgo: Int): Calendar {
         val cal = Calendar.getInstance()
         cal.add(Calendar.DATE, -daysAgo)
         return cal
     }
 
+    fun addService (title:EditText, content:TextView, button: Button,
+                    context: Context) {
+        val roomService = RoomService(context)
+        button.setOnClickListener {
+            val currentTitle = title.text.toString()
+            val currentContent = content.text.toString()
+            val note = ModelNote(0,currentTitle,currentContent)
+            Thread {
+                roomService.add(note)
+            }.start()
+            Toast.makeText(context,"Заметка добавлена", Toast.LENGTH_SHORT).show()
+
+        }
+
+    }
+
 }
+
+

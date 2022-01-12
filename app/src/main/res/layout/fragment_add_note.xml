@@ -4,36 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/red"
-    tools:context=".ui.NotesFragment">
+    android:background="@color/botton_sheet"
+    tools:context=".ui.AddNoteFragment">
 
-    <TextView
-        android:id="@+id/title_notes"
+    <EditText
+        android:id="@+id/title_note_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:background="@color/yellow"
+        android:hint="@string/title"
         android:textSize="@dimen/margin_twin"
-        android:padding="@dimen/margin_full"
-        android:text="@string/recycler_view_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/content_note_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/content"
+        android:textSize="@dimen/margin_full"
+        app:layout_constraintTop_toBottomOf="@+id/title_note_add" />
+
     <Button
-        android:id="@+id/add_note"
+        android:id="@+id/save_note"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/add_note"
-        app:layout_constraintTop_toBottomOf="@+id/title_notes" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_notes"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_note" />
-
+        app:layout_constraintTop_toBottomOf="@+id/content_note_add" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

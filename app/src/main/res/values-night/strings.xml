@@ -12,4 +12,6 @@
     <string name="foto">Фото</string>
     <string name="search_internet">Поиск фото в Интернете</string>
     <string name="add_note">Добавить заметку</string>
+    <string name="title">Заголовок</string>
+    <string name="content">Содержание</string>
 </resources>

@@ -19,4 +19,6 @@
     <string name="notes">Заметки</string>
     <string name="recycler_view_title">Заметки</string>
     <string name="add_note">Добавить заметку</string>
+    <string name="title">Заголовок</string>
+    <string name="content">Содержание</string>
 </resources>
