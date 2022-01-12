@@ -1,13 +1,15 @@
-package com.edurda77.blocknote2021.ui
+package com.edurda77.workmaterial.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.edurda77.blocknote2021.ui.NoteHolder
+import com.edurda77.workmaterial.domain.ItemTouchHelperAdapter
 import com.edurda77.workmaterial.model.ModelNote
+import java.util.*
 
-class NoteAdapter (private val list: List<ModelNote>, val onClickListener: OnStateClickListener) :
-    RecyclerView.Adapter<NoteHolder>()
-{
+class NoteAdapter(private val list: MutableList<ModelNote>, private val onClickListener: OnStateClickListener) :
+    RecyclerView.Adapter<NoteHolder>(), ItemTouchHelperAdapter {
     interface OnStateClickListener {
         fun onStateClick(note: ModelNote, position: Int)
     }
@@ -29,4 +31,22 @@ class NoteAdapter (private val list: List<ModelNote>, val onClickListener: OnSta
     }
 
     override fun getItemCount(): Int = list.size
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                Collections.swap(list, i, i + 1)
+            }
+        } else {
+            for (i in fromPosition downTo toPosition + 1) {
+                Collections.swap(list, i, i - 1)
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+
+    }
+
+    override fun onItemDismiss(position: Int) {
+        list.removeAt(position)
+        notifyItemRemoved(position)
+    }
 }

@@ -8,16 +8,16 @@ import android.os.Bundle
 import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import com.edurda77.workmaterial.ui.NoteAdapter
 import com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
 import com.edurda77.workmaterial.BuildConfig.PIXABAY_API_KEY
 import com.edurda77.workmaterial.R
-import com.edurda77.workmaterial.ui.AddNoteFragment
-import com.edurda77.workmaterial.ui.PhotoFragment
 
 
 import com.google.android.material.textfield.TextInputLayout
@@ -27,12 +27,17 @@ import retrofit2.Response
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.recyclerview.widget.ItemTouchHelper
+
+
+
 
 class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
-
+    private val currentNotes: MutableList<ModelNote> = emptyList<ModelNote>().toMutableList(),
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
     private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
+
 ) :
     ViewModel() {
 
@@ -168,20 +173,60 @@ class DailyImageViewModel(
         return cal
     }
 
-    fun addService (title:EditText, content:TextView, button: Button,
-                    context: Context) {
+    fun addService(
+        title: EditText, content: TextView, button: Button,
+        context: Context
+    ) {
         val roomService = RoomService(context)
         button.setOnClickListener {
             val currentTitle = title.text.toString()
             val currentContent = content.text.toString()
-            val note = ModelNote(0,currentTitle,currentContent)
+            val note = ModelNote(0, currentTitle, currentContent)
             Thread {
                 roomService.add(note)
             }.start()
-            Toast.makeText(context,"Заметка добавлена", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Заметка добавлена", Toast.LENGTH_SHORT).show()
 
         }
 
+    }
+
+    fun setRecycledView(recyclerView: RecyclerView, context: Context) {
+
+        recyclerView.layoutManager = LinearLayoutManager(
+            context, LinearLayoutManager
+                .VERTICAL, false
+        )
+
+        val nots = initNots(context)
+        val stateClickListener: NoteAdapter.OnStateClickListener =
+            object : NoteAdapter.OnStateClickListener {
+                override fun onStateClick(note: ModelNote, position: Int) {
+//                    Thread {
+//                        runOnUiThread {
+//                            val intent = Intent(this@MainActivity, NoteEditActivity::class.java)
+//                            intent.putExtra(NoteModel::class.java.simpleName, note)
+//
+//                            startActivity(intent)
+//                        }
+//                    }.start()
+                }
+            }
+        recyclerView.adapter = NoteAdapter(nots as MutableList<ModelNote>, stateClickListener)
+        val callback  = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(recyclerView)
+    }
+
+    private fun initNots(context: Context): List<ModelNote> {
+        val roomService = RoomService(context)
+        Thread {
+            roomService.getNots().forEach {
+                currentNotes.add(it)
+            }
+        }.start()
+
+        return currentNotes
     }
 
 }
