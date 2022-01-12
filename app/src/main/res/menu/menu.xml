@@ -14,9 +14,9 @@
         app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/image_mars"
-        android:title="@string/mars"
-        android:icon="@drawable/ic_mars"
+        android:id="@+id/image_notes"
+        android:title="@string/notes"
+        android:icon="@drawable/ic_notes"
         app:labelVisibilityMode="labeled"
         app:showAsAction="ifRoom" />
     <item

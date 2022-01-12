@@ -44,13 +44,13 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                 }
 
-                R.id.image_mars -> {
+                R.id.image_notes -> {
                     item.isChecked = true
                     supportFragmentManager.beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
                         .setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
                         .setReorderingAllowed(true)
-                        .replace(R.id.fragment_container_view, MarsFragment())
+                        .replace(R.id.fragment_container_view, NotesFragment())
                         .commit()
                 }
 

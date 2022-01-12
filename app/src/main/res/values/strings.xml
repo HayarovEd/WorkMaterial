@@ -16,4 +16,7 @@
     <string name="moon">Луна</string>
     <string name="foto">Фото</string>
     <string name="search_internet">Поиск фото в Интернете</string>
+    <string name="notes">Заметки</string>
+    <string name="recycler_view_title">Заметки</string>
+    <string name="add_note">Добавить заметку</string>
 </resources>
