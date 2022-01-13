@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
@@ -38,7 +39,7 @@ class DailyImageViewModel(
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
     private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
 
-) :
+    ) :
     ViewModel() {
 
     fun getImageData(daysAgo: Int): LiveData<DailyImage> {
@@ -206,7 +207,10 @@ class DailyImageViewModel(
                         fragment.activity?.supportFragmentManager
                             ?.beginTransaction()
                             ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            ?.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                            ?.setCustomAnimations(
+                                R.animator.slide_in_left,
+                                R.animator.slide_in_right
+                            )
                             ?.setReorderingAllowed(true)
                             ?.replace(R.id.fragment_container_view, AddNoteFragment())
                             ?.commit()
@@ -214,9 +218,16 @@ class DailyImageViewModel(
                 }
             }
         recyclerView.adapter = NoteAdapter(nots as MutableList<ModelNote>, stateClickListener)
-        val callback  = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
+        val callback = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(recyclerView)
+//        val sampleDiffUtil = DiffUtilCallback(
+//            recyclerView.adapter.items,
+//            nots
+//        )
+//        val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
+//        recyclerView.adapter.items = nots
+//        sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
     }
 
     private fun initNots(context: Context): List<ModelNote> {

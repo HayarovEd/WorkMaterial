@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.blocknote2021.ui.NoteHolder
 import com.edurda77.workmaterial.domain.ItemTouchHelperAdapter
 import com.edurda77.workmaterial.model.ModelNote
+import com.edurda77.workmaterial.model.RoomService
 import java.util.*
 
 class NoteAdapter(private val list: MutableList<ModelNote>, private val onClickListener: OnStateClickListener) :
@@ -41,6 +42,7 @@ class NoteAdapter(private val list: MutableList<ModelNote>, private val onClickL
                 Collections.swap(list, i, i - 1)
             }
         }
+
         notifyItemMoved(fromPosition, toPosition)
 
     }
