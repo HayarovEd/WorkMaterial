@@ -31,7 +31,7 @@ class NotesFragment : Fragment() {
                 ?.replace(R.id.fragment_container_view, AddNoteFragment())
                 ?.commit()
         }
-        viewModel.setRecycledView(recyclerView,view.context)
+        viewModel.setRecycledView(recyclerView,view.context, NotesFragment())
     }
 
     override fun onCreateView(

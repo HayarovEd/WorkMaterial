@@ -3,7 +3,6 @@ package com.edurda77.workmaterial.model
 import android.content.Context
 import androidx.room.Room
 import com.edurda77.blocknote2021.domain.NoteDao
-import com.edurda77.blocknote2021.domain.NoteRoomDb
 
 private const val DB_PATH="notes.db"
 class RoomService (context: Context): NoteDao {

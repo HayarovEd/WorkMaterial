@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,8 +29,7 @@ import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import androidx.recyclerview.widget.ItemTouchHelper
-
-
+import com.edurda77.workmaterial.ui.AddNoteFragment
 
 
 class DailyImageViewModel(
@@ -191,7 +191,7 @@ class DailyImageViewModel(
 
     }
 
-    fun setRecycledView(recyclerView: RecyclerView, context: Context) {
+    fun setRecycledView(recyclerView: RecyclerView, context: Context, fragment: Fragment) {
 
         recyclerView.layoutManager = LinearLayoutManager(
             context, LinearLayoutManager
@@ -202,14 +202,15 @@ class DailyImageViewModel(
         val stateClickListener: NoteAdapter.OnStateClickListener =
             object : NoteAdapter.OnStateClickListener {
                 override fun onStateClick(note: ModelNote, position: Int) {
-//                    Thread {
-//                        runOnUiThread {
-//                            val intent = Intent(this@MainActivity, NoteEditActivity::class.java)
-//                            intent.putExtra(NoteModel::class.java.simpleName, note)
-//
-//                            startActivity(intent)
-//                        }
-//                    }.start()
+                    Thread {
+                        fragment.activity?.supportFragmentManager
+                            ?.beginTransaction()
+                            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            ?.setCustomAnimations(R.animator.slide_in_left, R.animator.slide_in_right)
+                            ?.setReorderingAllowed(true)
+                            ?.replace(R.id.fragment_container_view, AddNoteFragment())
+                            ?.commit()
+                    }.start()
                 }
             }
         recyclerView.adapter = NoteAdapter(nots as MutableList<ModelNote>, stateClickListener)
