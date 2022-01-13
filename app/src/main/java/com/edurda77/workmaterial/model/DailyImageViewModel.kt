@@ -35,7 +35,7 @@ import com.edurda77.workmaterial.ui.AddNoteFragment
 
 class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
-    private val currentNotes: MutableList<ModelNote> = emptyList<ModelNote>().toMutableList(),
+    private var currentNotes: MutableList<ModelNote> = emptyList<ModelNote>().toMutableList(),
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
     private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
 
@@ -221,13 +221,14 @@ class DailyImageViewModel(
         val callback = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(recyclerView)
-//        val sampleDiffUtil = DiffUtilCallback(
-//            recyclerView.adapter.items,
-//            nots
-//        )
-//        val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
-//        recyclerView.adapter.items = nots
-//        sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
+        val sampleDiffUtil = DiffUtilCallback(
+            currentNotes,
+            nots
+        )
+        val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
+        currentNotes = nots
+        sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
+            //recyclerView.adapter = NoteAdapter(nots, stateClickListener)
     }
 
     private fun initNots(context: Context): List<ModelNote> {
