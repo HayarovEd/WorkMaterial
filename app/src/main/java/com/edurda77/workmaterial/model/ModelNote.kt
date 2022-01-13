@@ -9,6 +9,7 @@ const val NOTE_TABLE = "notes"
 const val NOTE_ID = "id"
 const val NOTE_TITLE = "title"
 const val NOTE_CONTENT = "content"
+
 @Entity(tableName = NOTE_TABLE)
 data class ModelNote (
     @PrimaryKey(autoGenerate = true)
@@ -18,6 +19,5 @@ data class ModelNote (
     val titleNote: String,
     @ColumnInfo(name = NOTE_CONTENT)
     val contentNote: String
-
 ) : Serializable
 

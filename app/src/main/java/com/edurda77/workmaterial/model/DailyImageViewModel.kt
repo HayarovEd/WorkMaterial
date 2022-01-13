@@ -35,12 +35,14 @@ import com.edurda77.workmaterial.ui.AddNoteFragment
 
 class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
-    private var currentNotes: MutableList<ModelNote> = emptyList<ModelNote>().toMutableList(),
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
     private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
+) : ViewModel() {
 
-    ) :
-    ViewModel() {
+    fun getNotes(context: Context): LiveData<List<ModelNote>> {
+        val roomService = RoomService(context)
+        return roomService.getNotesLiveData()
+    }
 
     fun getImageData(daysAgo: Int): LiveData<DailyImage> {
         sendServerRequest(daysAgo)
@@ -192,55 +194,6 @@ class DailyImageViewModel(
 
     }
 
-    fun setRecycledView(recyclerView: RecyclerView, context: Context, fragment: Fragment) {
-
-        recyclerView.layoutManager = LinearLayoutManager(
-            context, LinearLayoutManager
-                .VERTICAL, false
-        )
-
-        val nots = initNots(context)
-        val stateClickListener: NoteAdapter.OnStateClickListener =
-            object : NoteAdapter.OnStateClickListener {
-                override fun onStateClick(note: ModelNote, position: Int) {
-                    Thread {
-                        fragment.activity?.supportFragmentManager
-                            ?.beginTransaction()
-                            ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                            ?.setCustomAnimations(
-                                R.animator.slide_in_left,
-                                R.animator.slide_in_right
-                            )
-                            ?.setReorderingAllowed(true)
-                            ?.replace(R.id.fragment_container_view, AddNoteFragment())
-                            ?.commit()
-                    }.start()
-                }
-            }
-        recyclerView.adapter = NoteAdapter(nots as MutableList<ModelNote>, stateClickListener)
-        val callback = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
-        val touchHelper = ItemTouchHelper(callback)
-        touchHelper.attachToRecyclerView(recyclerView)
-        val sampleDiffUtil = DiffUtilCallback(
-            currentNotes,
-            nots
-        )
-        val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
-        currentNotes = nots
-        sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
-            //recyclerView.adapter = NoteAdapter(nots, stateClickListener)
-    }
-
-    private fun initNots(context: Context): List<ModelNote> {
-        val roomService = RoomService(context)
-        Thread {
-            roomService.getNots().forEach {
-                currentNotes.add(it)
-            }
-        }.start()
-
-        return currentNotes
-    }
 
 }
 

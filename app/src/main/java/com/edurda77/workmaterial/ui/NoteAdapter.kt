@@ -9,8 +9,12 @@ import com.edurda77.workmaterial.model.ModelNote
 import com.edurda77.workmaterial.model.RoomService
 import java.util.*
 
-class NoteAdapter(private val list: MutableList<ModelNote>, private val onClickListener: OnStateClickListener) :
-    RecyclerView.Adapter<NoteHolder>(), ItemTouchHelperAdapter {
+class NoteAdapter(
+    private val onClickListener: OnStateClickListener
+) : RecyclerView.Adapter<NoteHolder>(), ItemTouchHelperAdapter {
+
+    var list = emptyList<ModelNote>().toMutableList()
+
     interface OnStateClickListener {
         fun onStateClick(note: ModelNote, position: Int)
     }
@@ -32,6 +36,7 @@ class NoteAdapter(private val list: MutableList<ModelNote>, private val onClickL
     }
 
     override fun getItemCount(): Int = list.size
+
     override fun onItemMove(fromPosition: Int, toPosition: Int) {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {

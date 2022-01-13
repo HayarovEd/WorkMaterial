@@ -1,5 +1,6 @@
 package com.edurda77.blocknote2021.domain
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -13,11 +14,16 @@ import com.edurda77.workmaterial.model.NOTE_CONTENT
 interface NoteDao {
     @Insert
     fun add(note: ModelNote)
+
     @Query("SELECT * FROM $NOTE_TABLE")
-    fun getNots(): List<ModelNote>
+    fun getNotes(): List<ModelNote>
+
     @Query("DELETE FROM $NOTE_TABLE WHERE $NOTE_ID=:id")
     fun delete (id: Int)
+
     @Query("UPDATE $NOTE_TABLE SET $NOTE_TITLE=:title,$NOTE_CONTENT=:content  WHERE $NOTE_ID=:id")
     fun update (id: Int, title: String, content: String)
 
+    @Query("SELECT * FROM $NOTE_TABLE")
+    fun getNotesLiveData(): LiveData<List<ModelNote>>
 }
