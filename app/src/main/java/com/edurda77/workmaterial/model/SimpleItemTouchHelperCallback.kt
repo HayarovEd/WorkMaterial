@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.workmaterial.domain.ItemTouchHelperAdapter
 
 
-class SimpleItemTouchHelperCallback(var mAdapter: ItemTouchHelperAdapter)
+class SimpleItemTouchHelperCallback(private var mAdapter: ItemTouchHelperAdapter)
     : ItemTouchHelper.Callback() {
 
 

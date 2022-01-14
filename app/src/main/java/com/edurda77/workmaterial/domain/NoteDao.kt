@@ -1,4 +1,4 @@
-package com.edurda77.blocknote2021.domain
+package com.edurda77.workmaterial.domain
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -2,7 +2,6 @@ package com.edurda77.workmaterial.domain
 
 import com.edurda77.workmaterial.model.Earth
 import com.edurda77.workmaterial.model.ImagesMars
-import com.edurda77.workmaterial.model.Mars
 import com.edurda77.workmaterial.model.PODServerResponseData
 import retrofit2.Call
 import retrofit2.http.GET

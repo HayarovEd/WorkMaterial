@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.model
 
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
@@ -8,20 +9,13 @@ import android.os.Bundle
 import android.widget.*
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
-import com.edurda77.workmaterial.ui.NoteAdapter
 import com.edurda77.workmaterial.BuildConfig.NASA_API_KEY
 import com.edurda77.workmaterial.BuildConfig.PIXABAY_API_KEY
 import com.edurda77.workmaterial.R
-
-
 import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,8 +23,6 @@ import retrofit2.Response
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.recyclerview.widget.ItemTouchHelper
-import com.edurda77.workmaterial.ui.AddNoteFragment
 
 
 class DailyImageViewModel(
@@ -146,7 +138,7 @@ class DailyImageViewModel(
         return liveDataForEarth
     }
 
-    fun getPhoto(query: String): List<Photo> {
+    private fun getPhoto(query: String): List<Photo> {
         val liveDataForSearchPhoto: MutableList<Photo> = emptyList<Photo>().toMutableList()
         val images: SearchedPhoto? = retrofitPixaImpl.getPixabayService()
             .getPhoto(PIXABAY_API_KEY, query, LANGUAGE).execute().body()

@@ -18,8 +18,8 @@ class EditNoteFragment : Fragment() {
 
     private lateinit var titleEditText: EditText
     private lateinit var contentEditText: EditText
-    private lateinit var saveButtom: Button
-    private lateinit var deleteButtom: Button
+    private lateinit var saveButton: Button
+    private lateinit var deleteButton: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,8 +33,8 @@ class EditNoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         titleEditText = view.findViewById(R.id.title_note_update)
         contentEditText = view.findViewById(R.id.content_note_update)
-        saveButtom = view.findViewById(R.id.update_note)
-        deleteButtom = view.findViewById(R.id.delete_note)
+        saveButton = view.findViewById(R.id.update_note)
+        deleteButton = view.findViewById(R.id.delete_note)
 
         setFragmentResultListener("requestKey") { key, bundle ->
             val result = bundle.get("bundleKey") as ModelNote
@@ -43,9 +43,9 @@ class EditNoteFragment : Fragment() {
             contentEditText.setText(result.contentNote)
             val note = ModelNote(result.idNote, result.titleNote, result.contentNote)
 
-            viewModel.updateService(note, saveButtom, view.context)
+            viewModel.updateService(note, saveButton, view.context)
 
-            viewModel.deleteService(note.idNote, deleteButtom, view.context)
+            viewModel.deleteService(note.idNote, deleteButton, view.context)
         }
     }
 }

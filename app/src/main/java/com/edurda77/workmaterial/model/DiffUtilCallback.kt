@@ -3,8 +3,8 @@ package com.edurda77.workmaterial.model
 import androidx.recyclerview.widget.DiffUtil
 
 class DiffUtilCallback(
-    val oldList: List<ModelNote>,
-    val newList: List<ModelNote>
+    private val oldList: List<ModelNote>,
+    private val newList: List<ModelNote>
 ) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {

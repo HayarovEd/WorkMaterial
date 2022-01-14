@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import coil.api.load
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImageViewModel
 import com.google.android.material.textfield.TextInputLayout

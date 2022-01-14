@@ -1,10 +1,9 @@
 package com.edurda77.workmaterial.ui
 
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.ListFragment
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import com.edurda77.workmaterial.R
@@ -13,14 +12,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var bottomNavigaion: BottomNavigationView
+    private lateinit var bottomNavigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
 
         setTheme(R.style.Theme_Moon)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        bottomNavigaion = findViewById(R.id.bottom_navigation_view)
-        bottomNavigaion.itemIconTintList = null
+        bottomNavigation = findViewById(R.id.bottom_navigation_view)
+        bottomNavigation.itemIconTintList = null
         setMenu()
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setMenu() {
-        bottomNavigaion.setOnNavigationItemSelectedListener { item ->
+        bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.image_earth -> {
                     item.isChecked = true

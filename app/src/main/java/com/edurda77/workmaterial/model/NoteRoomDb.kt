@@ -2,7 +2,7 @@ package com.edurda77.workmaterial.model
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.edurda77.blocknote2021.domain.NoteDao
+import com.edurda77.workmaterial.domain.NoteDao
 
 @Database(
     entities = [ModelNote:: class],
