@@ -15,9 +15,6 @@ interface NoteDao {
     @Insert
     fun add(note: ModelNote)
 
-    @Query("SELECT * FROM $NOTE_TABLE")
-    fun getNotes(): List<ModelNote>
-
     @Query("DELETE FROM $NOTE_TABLE WHERE $NOTE_ID=:id")
     fun delete (id: Int)
 

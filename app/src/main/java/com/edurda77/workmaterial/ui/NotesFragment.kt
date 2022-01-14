@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.os.bundleOf
 import androidx.fragment.app.*
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -27,7 +28,7 @@ class NotesFragment : Fragment() {
             object : NoteAdapter.OnStateClickListener {
 
                 override fun onStateClick(note: ModelNote, position: Int) {
-                    //Thread {
+                    setFragmentResult("requestKey", bundleOf("bundleKey" to note))
                     requireActivity().supportFragmentManager
                         .beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -36,9 +37,8 @@ class NotesFragment : Fragment() {
                             R.animator.slide_in_right
                         )
                         .setReorderingAllowed(true)
-                        .replace(R.id.fragment_container_view, AddNoteFragment())
+                        .replace(R.id.fragment_container_view, EditNoteFragment())
                         .commit()
-                    // }.start()
                 }
             }
 

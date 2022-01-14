@@ -21,4 +21,5 @@
     <string name="add_note">Добавить заметку</string>
     <string name="title">Заголовок</string>
     <string name="content">Содержание</string>
+    <string name="update_note">Сохранить заметку</string>
 </resources>

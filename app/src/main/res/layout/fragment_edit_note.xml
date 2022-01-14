@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_700"
+    tools:context=".ui.EditNoteFragment">
+
+
+    <EditText
+        android:id="@+id/title_note_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow"
+        android:hint="@string/title"
+        android:textSize="@dimen/margin_twin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/content_note_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/content"
+        android:textSize="@dimen/margin_full"
+        app:layout_constraintTop_toBottomOf="@+id/title_note_update" />
+
+    <Button
+        android:id="@+id/update_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/update_note"
+        app:layout_constraintTop_toBottomOf="@+id/content_note_update" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,10 +3,8 @@ package com.edurda77.workmaterial.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.edurda77.blocknote2021.ui.NoteHolder
 import com.edurda77.workmaterial.domain.ItemTouchHelperAdapter
 import com.edurda77.workmaterial.model.ModelNote
-import com.edurda77.workmaterial.model.RoomService
 import java.util.*
 
 class NoteAdapter(

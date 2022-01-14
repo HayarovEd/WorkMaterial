@@ -18,10 +18,6 @@ class RoomService(context: Context) : NoteDao {
         noteDao.add(note)
     }
 
-    override fun getNotes(): List<ModelNote> {
-        return noteDao.getNotes()
-    }
-
     override fun delete(id: Int) {
         noteDao.delete(id)
     }

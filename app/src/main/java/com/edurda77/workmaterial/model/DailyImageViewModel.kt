@@ -177,7 +177,9 @@ class DailyImageViewModel(
     }
 
     fun addService(
-        title: EditText, content: TextView, button: Button,
+        title: EditText,
+        content: EditText,
+        button: Button,
         context: Context
     ) {
         val roomService = RoomService(context)
@@ -194,7 +196,33 @@ class DailyImageViewModel(
 
     }
 
+    fun deleteService(
+        id: Int,
+        button: Button,
+        context: Context
+    ) {
+        val roomService = RoomService(context)
+        button.setOnClickListener {
+            Thread {
+                roomService.delete(id)
+            }.start()
+            Toast.makeText(context, "Заметка удалена", Toast.LENGTH_SHORT).show()
+        }
+    }
 
+    fun updateService(
+        note: ModelNote,
+        button: Button,
+        context: Context
+    ) {
+        val roomService = RoomService(context)
+        button.setOnClickListener {
+            Thread {
+                roomService.update(note.idNote, note.titleNote, note.contentNote)
+            }.start()
+            Toast.makeText(context, "Заметка обновлена", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
 
 

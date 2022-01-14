@@ -1,4 +1,4 @@
-package com.edurda77.blocknote2021.ui
+package com.edurda77.workmaterial.ui
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
