@@ -23,4 +23,7 @@ interface NoteDao {
 
     @Query("SELECT * FROM $NOTE_TABLE")
     fun getNotesLiveData(): LiveData<List<ModelNote>>
+
+    @Query("SELECT * FROM $NOTE_TABLE WHERE $NOTE_ID=:id ")
+    fun getNoteLiveData(id: Int): LiveData<ModelNote>
 }

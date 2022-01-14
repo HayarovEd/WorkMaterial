@@ -35,6 +35,10 @@ class DailyImageViewModel(
         val roomService = RoomService(context)
         return roomService.getNotesLiveData()
     }
+    fun getNote(context: Context, id:Int): LiveData<ModelNote> {
+        val roomService = RoomService(context)
+        return roomService.getNoteLiveData(id)
+    }
 
     fun getImageData(daysAgo: Int): LiveData<DailyImage> {
         sendServerRequest(daysAgo)
@@ -203,14 +207,18 @@ class DailyImageViewModel(
     }
 
     fun updateService(
-        note: ModelNote,
+        id: Int,
+        titleEditText: EditText,
+        contentEditText: EditText,
         button: Button,
         context: Context
     ) {
         val roomService = RoomService(context)
         button.setOnClickListener {
+            val content = contentEditText.text.toString()
+            val title = titleEditText.text.toString()
             Thread {
-                roomService.update(note.idNote, note.titleNote, note.contentNote)
+                roomService.update(id, title, content)
             }.start()
             Toast.makeText(context, "Заметка обновлена", Toast.LENGTH_SHORT).show()
         }

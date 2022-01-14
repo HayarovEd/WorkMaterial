@@ -9,6 +9,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImageViewModel
 import com.edurda77.workmaterial.model.ModelNote
@@ -36,16 +38,16 @@ class EditNoteFragment : Fragment() {
         saveButton = view.findViewById(R.id.update_note)
         deleteButton = view.findViewById(R.id.delete_note)
 
+
         setFragmentResultListener("requestKey") { key, bundle ->
             val result = bundle.get("bundleKey") as ModelNote
-
-            titleEditText.setText(result.titleNote)
-            contentEditText.setText(result.contentNote)
             val note = ModelNote(result.idNote, result.titleNote, result.contentNote)
+            val id = note.idNote
+            titleEditText.setText(note.titleNote)
+            contentEditText.setText(note.contentNote)
+            viewModel.updateService(id, titleEditText, contentEditText, saveButton, view.context)
+            viewModel.deleteService(id, deleteButton, view.context)
 
-            viewModel.updateService(note, saveButton, view.context)
-
-            viewModel.deleteService(note.idNote, deleteButton, view.context)
         }
     }
 }

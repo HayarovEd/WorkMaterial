@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.os.bundleOf
 import androidx.fragment.app.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +21,7 @@ import com.edurda77.workmaterial.model.*
 class NotesFragment : Fragment() {
 
     private val viewModel by viewModels<DailyImageViewModel>()
-
+    //private lateinit var liveData :MutableLiveData<ModelNote>
     private lateinit var addNote: Button
     private lateinit var recyclerView: RecyclerView
 

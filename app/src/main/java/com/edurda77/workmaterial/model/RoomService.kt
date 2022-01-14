@@ -32,5 +32,8 @@ class RoomService(context: Context) {
     fun getNotesLiveData(): LiveData<List<ModelNote>> {
         return noteDao.getNotesLiveData()
     }
+    fun getNoteLiveData(id: Int): LiveData<ModelNote>{
+        return noteDao.getNoteLiveData(id)
+    }
 
 }
