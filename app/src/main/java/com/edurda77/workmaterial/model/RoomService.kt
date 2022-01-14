@@ -2,6 +2,9 @@ package com.edurda77.workmaterial.model
 
 import android.content.Context
 import androidx.lifecycle.LiveData
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import androidx.room.Room
 import com.edurda77.workmaterial.domain.NoteDao
 
