@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edurda77.workmaterial.domain.ItemTouchHelperAdapter
 
 
-class SimpleItemTouchHelperCallback(private var mAdapter: ItemTouchHelperAdapter)
-    : ItemTouchHelper.Callback() {
+class SimpleItemTouchHelperCallback(
+    private val onItemMove: (from: Int, to: Int) -> Unit,
+    private val onItemSwiped: (position: Int) -> Unit,
+) : ItemTouchHelper.Callback() {
 
 
     override fun getMovementFlags(
@@ -23,12 +25,14 @@ class SimpleItemTouchHelperCallback(private var mAdapter: ItemTouchHelperAdapter
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        mAdapter.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        val fromPosition = viewHolder.adapterPosition
+        val toPosition = target.adapterPosition
+        onItemMove(fromPosition, toPosition)
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        mAdapter.onItemDismiss(viewHolder.adapterPosition)
+        onItemSwiped(viewHolder.adapterPosition)
     }
 
     override fun isLongPressDragEnabled(): Boolean {
