@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -46,6 +47,7 @@ class NotesFragment : Fragment() {
     }
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addNote = view.findViewById(R.id.add_note)
@@ -66,7 +68,20 @@ class NotesFragment : Fragment() {
 
         viewModel.getNotes(requireContext()).observe(viewLifecycleOwner) { items ->
             adapter.list = items.toMutableList()
-            adapter.notifyDataSetChanged()
+
+            val sampleDiffUtil = DiffUtilCallback(
+                adapter.list,
+                items,
+            )
+
+            val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
+            adapter.list = items.toMutableList()
+
+            sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
+            val callback = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
+            val touchHelper = ItemTouchHelper(callback)
+            touchHelper.attachToRecyclerView(recyclerView)
+
         }
     }
 
@@ -77,52 +92,5 @@ class NotesFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_notes, container, false)
     }
-
-//    fun initRecycledView(recyclerView: RecyclerView, context: Context, fragment: Fragment) {
-//
-//        recyclerView.layoutManager = LinearLayoutManager(context)
-//        val notes = initNotes(context)
-//        val stateClickListener: NoteAdapter.OnStateClickListener =
-//            object : NoteAdapter.OnStateClickListener {
-//                override fun onStateClick(note: ModelNote, position: Int) {
-//                    Thread {
-//                        fragment.requireActivity().supportFragmentManager
-//                            .beginTransaction()
-//                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-//                            .setCustomAnimations(
-//                                R.animator.slide_in_left,
-//                                R.animator.slide_in_right
-//                            )
-//                            .setReorderingAllowed(true)
-//                            .replace(R.id.fragment_container_view, AddNoteFragment())
-//                            .commit()
-//                    }.start()
-//                }
-//            }
-//        recyclerView.adapter = NoteAdapter(notes as MutableList<ModelNote>, stateClickListener)
-//        val callback = SimpleItemTouchHelperCallback(recyclerView.adapter as NoteAdapter)
-//        val touchHelper = ItemTouchHelper(callback)
-//        touchHelper.attachToRecyclerView(recyclerView)
-//        val sampleDiffUtil = DiffUtilCallback(
-//            currentNotes,
-//            notes
-//        )
-//        val sampleDiffResult = DiffUtil.calculateDiff(sampleDiffUtil)
-//        currentNotes = notes
-//        sampleDiffResult.dispatchUpdatesTo(recyclerView.adapter as NoteAdapter)
-//        //recyclerView.adapter = NoteAdapter(nots, stateClickListener)
-//    }
-
-//    private fun initNotes(context: Context): List<ModelNote> {
-//        val roomService = RoomService(context)
-//        Thread {
-//            roomService.getNotes().forEach {
-//                currentNotes.add(it)
-//            }
-//        }.start()
-//
-//        return currentNotes
-//    }
-
 
 }

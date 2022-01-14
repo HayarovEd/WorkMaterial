@@ -16,9 +16,10 @@ import com.edurda77.workmaterial.model.ModelNote
 class EditNoteFragment : Fragment() {
     private val viewModel by viewModels<DailyImageViewModel>()
 
-    private lateinit var  titleEditText: EditText
-    private lateinit var  contentEditText: EditText
-    private lateinit var  saveButtom: Button
+    private lateinit var titleEditText: EditText
+    private lateinit var contentEditText: EditText
+    private lateinit var saveButtom: Button
+    private lateinit var deleteButtom: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +34,18 @@ class EditNoteFragment : Fragment() {
         titleEditText = view.findViewById(R.id.title_note_update)
         contentEditText = view.findViewById(R.id.content_note_update)
         saveButtom = view.findViewById(R.id.update_note)
+        deleteButtom = view.findViewById(R.id.delete_note)
 
         setFragmentResultListener("requestKey") { key, bundle ->
             val result = bundle.get("bundleKey") as ModelNote
 
             titleEditText.setText(result.titleNote)
             contentEditText.setText(result.contentNote)
-            val note = ModelNote(result.idNote,result.titleNote, result.contentNote)
-                viewModel.updateService(note,saveButtom, view.context)
-            //viewModel.deleteService(note.idNote,saveButtom, view.context)
+            val note = ModelNote(result.idNote, result.titleNote, result.contentNote)
+
+            viewModel.updateService(note, saveButtom, view.context)
+
+            viewModel.deleteService(note.idNote, deleteButtom, view.context)
         }
-
-
     }
 }

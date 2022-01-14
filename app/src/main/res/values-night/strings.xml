@@ -15,4 +15,5 @@
     <string name="title">Заголовок</string>
     <string name="content">Содержание</string>
     <string name="update_note">Сохранить заметку</string>
+    <string name="delete_note">Удалить замету</string>
 </resources>

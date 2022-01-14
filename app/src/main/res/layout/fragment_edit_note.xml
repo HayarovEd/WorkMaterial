@@ -34,5 +34,10 @@
         android:layout_height="wrap_content"
         android:text="@string/update_note"
         app:layout_constraintTop_toBottomOf="@+id/content_note_update" />
-
+    <Button
+        android:id="@+id/delete_note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_note"
+        app:layout_constraintTop_toBottomOf="@+id/update_note" />
 </androidx.constraintlayout.widget.ConstraintLayout>
