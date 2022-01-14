@@ -30,7 +30,7 @@ class NotesFragment : Fragment() {
             object : NoteAdapter.OnStateClickListener {
 
                 override fun onStateClick(note: ModelNote, position: Int) {
-                    setFragmentResult("requestKey", bundleOf("bundleKey" to note))
+                    setFragmentResult("requestKey", bundleOf("bundleKey" to note.idNote))
                     requireActivity().supportFragmentManager
                         .beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

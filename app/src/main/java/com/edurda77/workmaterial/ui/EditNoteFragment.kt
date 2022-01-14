@@ -40,14 +40,20 @@ class EditNoteFragment : Fragment() {
 
 
         setFragmentResultListener("requestKey") { key, bundle ->
-            val result = bundle.get("bundleKey") as ModelNote
-            val note = ModelNote(result.idNote, result.titleNote, result.contentNote)
-            val id = note.idNote
-            titleEditText.setText(note.titleNote)
-            contentEditText.setText(note.contentNote)
-            viewModel.updateService(id, titleEditText, contentEditText, saveButton, view.context)
-            viewModel.deleteService(id, deleteButton, view.context)
-
+            val result = bundle.get("bundleKey") as Int
+            viewModel.getNote(requireContext(), result).observe(viewLifecycleOwner) { item ->
+                val id = item.idNote
+                titleEditText.setText(item.titleNote)
+                contentEditText.setText(item.contentNote)
+                viewModel.updateService(
+                    id,
+                    titleEditText,
+                    contentEditText,
+                    saveButton,
+                    view.context
+                )
+                viewModel.deleteService(id, deleteButton, view.context)
+            }
         }
     }
 }
