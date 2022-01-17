@@ -1,5 +1,6 @@
 package com.edurda77.workmaterial.ui
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
@@ -42,6 +43,9 @@ class BasicFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         dailyImageView = view.findViewById(R.id.image_view)
         dailyTextExplanation  = view.findViewById(R.id.text_explanation)
+
+        activity?.let {
+            dailyTextExplanation.typeface = Typeface.createFromAsset(it.assets, "lemurmure.ttf")}
         setTextInput(view, savedInstanceState)
 
 

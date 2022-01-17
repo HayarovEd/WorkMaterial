@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:fontFamily="@font/fallingskyblack"
         android:textSize="@dimen/margin_twin"
         android:padding="@dimen/margin_full"
         android:text="@string/recycler_view_title"

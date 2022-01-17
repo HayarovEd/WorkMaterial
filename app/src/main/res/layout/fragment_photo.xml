@@ -34,6 +34,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_edit_text_search_internet"
+            android:fontFamily="@font/thebomb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

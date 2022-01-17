@@ -49,6 +49,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_edit_last_data"
+                    android:fontFamily="@font/thebomb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
