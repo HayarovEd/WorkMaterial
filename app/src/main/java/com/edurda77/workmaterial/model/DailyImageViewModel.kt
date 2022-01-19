@@ -29,16 +29,19 @@ class DailyImageViewModel(
     private val liveDataForViewToObserve: MutableLiveData<DailyImage> = MutableLiveData(),
     private val retrofitImpl: NasaServiceProvider = NasaServiceProvider(),
     private val retrofitPixaImpl: PixabayServiceProvader = PixabayServiceProvader(),
+    private val noteLiveData: MutableLiveData<ModelNote> = MutableLiveData()
 ) : ViewModel() {
 
     fun getNotes(context: Context): LiveData<List<ModelNote>> {
         val roomService = RoomService(context)
         return roomService.getNotesLiveData()
     }
-    fun getNote(context: Context, id:Int): LiveData<ModelNote> {
+
+    fun getNote(context: Context, id: Int): LiveData<ModelNote> {
         val roomService = RoomService(context)
         return roomService.getNoteLiveData(id)
     }
+
 
     fun getImageData(daysAgo: Int): LiveData<DailyImage> {
         sendServerRequest(daysAgo)
@@ -223,6 +226,7 @@ class DailyImageViewModel(
             Toast.makeText(context, "Заметка обновлена", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
 
 

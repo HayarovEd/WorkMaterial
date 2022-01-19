@@ -1,19 +1,16 @@
 package com.edurda77.workmaterial.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.edurda77.workmaterial.R
 import com.edurda77.workmaterial.model.DailyImageViewModel
-import com.edurda77.workmaterial.model.ModelNote
 
 class EditNoteFragment : Fragment() {
     private val viewModel by viewModels<DailyImageViewModel>()
@@ -37,7 +34,6 @@ class EditNoteFragment : Fragment() {
         contentEditText = view.findViewById(R.id.content_note_update)
         saveButton = view.findViewById(R.id.update_note)
         deleteButton = view.findViewById(R.id.delete_note)
-
 
         setFragmentResultListener("requestKey") { key, bundle ->
             val result = bundle.get("bundleKey") as Int
