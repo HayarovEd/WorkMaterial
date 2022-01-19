@@ -13,30 +13,4 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
-    <style name="Theme.Space" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">#18141E</item>
-        <item name="colorPrimaryVariant">#2196F3</item>
-        <item name="colorOnPrimary">@color/purple_700</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">#DA0347</item>
-        <item name="colorSecondaryVariant">#4CAF50</item>
-        <item name="colorOnSecondary">#CDDC39</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-    <style name="Theme.Moon" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">#E91E63</item>
-        <item name="colorPrimaryVariant">#4CAF50</item>
-        <item name="colorOnPrimary">#FFC107</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">#9C27B0</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.edurda77.workmaterial">
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -11,9 +10,6 @@
         android:roundIcon="@drawable/outer_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.WorkMaterial">
-        <activity
-            android:name=".ui.CustomActivity"
-            android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

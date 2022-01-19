@@ -4,7 +4,7 @@
         <item
             android:id="@+id/navigation_one"
             android:icon="@drawable/ic_archive"
-            android:title="@string/start_custom" />
+            android:title="На экран 1" />
         <item
             android:id="@+id/navigation_two"
             android:icon="@drawable/ic_send"
